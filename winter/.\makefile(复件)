@@ -1,0 +1,28 @@
+main: main.o user.o admin.o order.o cacu.o buyer.o seller.o sqls.o commodity.o commu.o window.o
+	g++ main.o user.o admin.o order.o cacu.o buyer.o seller.o sqls.o commodity.o commu.o window.o -o main
+main.o: main.cpp window_mode.h order.h User.h Seller.h commodity.h communication.h sqls.h
+	g++ -c main.cpp window_mode.h order.h User.h Seller.h commodity.h communication.h sqls.h -o main.o
+user.o : user.cpp User.h Buyer.h Seller.h commodity.h communication.h sqls.h
+	g++ -c user.cpp -o user.o
+admin.o: administrator.cpp Administrator.h order.h commodity.h User.h
+	g++ -c administrator.cpp -o admin.o
+cacu.o: cacu.cpp caculate2.h
+	g++ -c cacu.cpp -o cacu.o
+order.o: order.cpp order.h sqls.h
+	g++ -c order.cpp -o order.o
+buyer.o:Buyer.cpp Buyer.h User.h order.h
+	g++ -c Buyer.cpp -o buyer.o
+seller.o: seller.cpp Seller.h  User.h commodity.h order.h sqls.h
+	g++ -c seller.cpp -o seller.o
+sql.o: sqls.cpp sqls.h User.h commodity.h order.h Administrator.h
+	g++ -c sqls.cpp -o sqls.o
+commodity.o: commodity.cpp commodity.h sqls.h
+	g++ -c commodity.cpp -o commodity.o
+commu.o: communication.cpp communication.h commodity.h
+	g++ -c communication.cpp -o commu.o
+window.o: window_mode.cpp window_mode.h Administrator.h User.h caculate2.h sqls.h
+	g++ -c window_mode.cpp -o window.o
+
+clean:
+	rm *.o 
+	rm main
